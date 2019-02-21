@@ -13,3 +13,4 @@ const AppNavigator = createStackNavigator({
 const AppNav = createAppContainer(AppNavigator);
 
 export default AppNav;
+

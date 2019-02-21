@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 
 import AppNav from './components/AppNavigator';
-
+import UdemyApi from './components/mail';
 
 export default class App extends React.Component {
   render() {
