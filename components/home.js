@@ -3,16 +3,10 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, Linking } from 'react-native';
 
 import { authorize } from 'react-native-app-auth';
-import { AppAuth } from 'expo-app-auth';
-import { Google } from 'expo';
+
+import * as Expo from 'expo';
 
 
-const clientId = '1055713492999-t2a4mqngsspj8u5cpgi7i70gefrts443.apps.googleusercontent.com';
-const { type, accessToken, user } = await Google.logInAsync({ clientId });
-
-if(type === 'success') {
-    console.log(user);
-}
 
 class HomeScreen extends React.Component {
     constructor(props) {
@@ -25,11 +19,29 @@ class HomeScreen extends React.Component {
     }
 
     signIn = async () => {
-        this.setState({
-            loggedIn: true,
-            name: "John Snowden",
-            photoUrl: "https://en.wikipedia.org/wiki/Edward_Snowden#/media/File:Edward_Snowden-2.jpg"
-        })
+        try {
+            const result = await Expo.Google.logInAsync({
+                iosClientId:
+                    "531799385489-3afjbeu701pfvpasm9br77emtb5vrnk4.apps.googleusercontent.com",
+                scopes: ["profile", "email"]
+            })
+
+            if(result.type === "success") {
+                this.setState({
+                    loggedIn: true,
+                    name: result.user.name,
+                    photoUrl: result.user.photoUrl
+                })
+            }
+            else{
+                console.log("cancelled")
+            }
+
+        }
+        catch(e) {
+            console.log("error", e)
+        }
+
     }
 
     render() {
@@ -46,19 +58,23 @@ class HomeScreen extends React.Component {
                     onPress={() => Linking.openURL("https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=ba9633d6-4d45-4d8b-abc2-06ffcbcf74bf&redirect_uri=com.example.app://auth&response_type=code&scope=openid+Mail.Read")}
                 />
                 {this.state.loggedIn ? (
-                <Button
-                    title="Google sign in"
-                    onPress={() => this.signIn()}
-                    />
+                    <Text>{this.state.name}</Text>
                     ) : (
-                        <Button 
-                            title="Log out of google"
-                        />
+                        <LoginPage signIn={this.signIn}/>
                     )}
             </View>
         );
     }
     
+}
+
+const LoginPage = props => {
+    return(
+        <View>
+            <Text>Sign in With Google</Text>
+            <Button title="google sign in " onPress={() => props.signIn()}/>
+        </View>
+    )
 }
 
 const styles = StyleSheet.create({

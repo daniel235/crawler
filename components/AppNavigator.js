@@ -5,6 +5,7 @@ import HomeScreen from './home';
 import ProfileScreen from './profile';
 
 
+
 const AppNavigator = createStackNavigator({
     Home: { screen: HomeScreen }, 
     Profile: {screen: ProfileScreen},
