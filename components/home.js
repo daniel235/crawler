@@ -8,15 +8,34 @@ import * as Expo from 'expo';
 
 
 
+
+
 class HomeScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = { loggedIn: false,
             name: "", 
-            photoUrl: ""
+            photoUrl: "",
+            accessToken: "",
+            messages: "",
         }
         
     }
+
+    messages = async() => {
+        try {
+            this.state.messages = fetch("https://www.googleapis.com/gmail/v1/users/me/messages/", {
+                method: 'GET',
+
+            });
+            
+        }
+        catch(e){
+            console.log("error", e)
+        }
+        
+    }
+
 
     signIn = async () => {
         try {
@@ -30,7 +49,8 @@ class HomeScreen extends React.Component {
                 this.setState({
                     loggedIn: true,
                     name: result.user.name,
-                    photoUrl: result.user.photoUrl
+                    photoUrl: result.user.photoUrl,
+                    accessToken: result.accessToken
                 })
             }
             else{
@@ -58,10 +78,14 @@ class HomeScreen extends React.Component {
                     onPress={() => Linking.openURL("https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=ba9633d6-4d45-4d8b-abc2-06ffcbcf74bf&redirect_uri=com.example.app://auth&response_type=code&scope=openid+Mail.Read")}
                 />
                 {this.state.loggedIn ? (
-                    <Text>{this.state.name}</Text>
+                        <LoggedIn messages={this.messages}/>
                     ) : (
                         <LoginPage signIn={this.signIn}/>
                     )}
+
+                <Text>{this.state.messages}</Text>
+
+                
             </View>
         );
     }
@@ -73,6 +97,14 @@ const LoginPage = props => {
         <View>
             <Text>Sign in With Google</Text>
             <Button title="google sign in " onPress={() => props.signIn()}/>
+        </View>
+    )
+}
+
+const LoggedIn = props => {
+    return(
+        <View>
+            <Button title="Get Messages" onPress={() => props.messages()}/>
         </View>
     )
 }
