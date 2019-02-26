@@ -6,8 +6,6 @@ const app = express();
 admin.initializeApp();
 
 
-var serviceAccount = require("path/to/serviceAccountKey.json");
-
 const authenticate = async (req, res, next) => {
     if(!req.headers.authorization || !req.headers.startsWith('Bearer')){
         res.status(403).send('Unauthorized');
@@ -27,3 +25,7 @@ const authenticate = async (req, res, next) => {
 }
 
 app.use(authenticate);
+
+
+
+

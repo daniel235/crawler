@@ -14,6 +14,7 @@
     <script defer src="/__/firebase/5.8.4/firebase-storage.js"></script>
     <!-- initialize the SDK after all desired features are loaded -->
     <script defer src="/__/firebase/init.js"></script>
+    <script src="js/app.js"></script>
 
     <style media="screen">
       body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
@@ -38,6 +39,7 @@
       <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
     </div>
     <p id="load">Firebase SDK Loading&hellip;</p>
+    <button id="gmail_auth">gmail auth</button>
 
     <script>
       document.addEventListener('DOMContentLoaded', function() {
@@ -59,9 +61,6 @@
           console.error(e);
           document.getElementById('load').innerHTML = 'Error loading the Firebase SDK, check the console.';
         }
-
-        //functions for backend
-        
 
       });
     </script>
