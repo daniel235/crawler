@@ -1,5 +1,6 @@
 {
   "projects": {
-    "crawler": "crawler-90244"
+    "crawler": "crawler-90244",
+    "default": "crawler-90244"
   }
 }
