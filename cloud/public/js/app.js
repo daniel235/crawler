@@ -1,5 +1,2 @@
 
-window.alert("test");
-
-
 

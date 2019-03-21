@@ -7,9 +7,6 @@ import { authorize } from 'react-native-app-auth';
 import * as Expo from 'expo';
 
 
-
-
-
 class HomeScreen extends React.Component {
     constructor(props) {
         super(props);
@@ -26,7 +23,6 @@ class HomeScreen extends React.Component {
         try {
             this.state.messages = fetch("https://www.googleapis.com/gmail/v1/users/me/messages/", {
                 method: 'GET',
-
             });
             
         }
