@@ -21,10 +21,13 @@ class HomeScreen extends React.Component {
 
     messages = async() => {
         try {
-            this.state.messages = fetch("https://www.googleapis.com/gmail/v1/users/me/messages/", {
+            this.state.messages = fetch("https://crawler-90244.firebaseapp.com/messages", {
                 method: 'GET',
+                headers: new Headers({
+                    'Authorization': this.state.accessToken
+                }),
             });
-            
+            console.log(this.state.messages);
         }
         catch(e){
             console.log("error", e)
