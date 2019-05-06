@@ -4,7 +4,9 @@ import { StyleSheet, Text, View, Button, Linking } from 'react-native';
 
 import { authorize } from 'react-native-app-auth';
 
+
 import * as Expo from 'expo';
+import Axios from 'axios';
 
 
 class HomeScreen extends React.Component {
@@ -20,17 +22,26 @@ class HomeScreen extends React.Component {
     }
 
     messages = async() => {
+        //set current user
+        user = {
+            first: 'daniel',
+            last: 'acevedo',
+            born: 'never',
+        }
+
         try {
             this.state.messages = fetch("https://crawler-90244.firebaseapp.com/messages", {
                 method: 'GET',
+                body: user,
                 headers: new Headers({
                     'Authorization': this.state.accessToken
                 }),
-            });
-            console.log(this.state.messages);
+            }).then(function(response) {
+                this.state.messages = response;
+            })
         }
         catch(e){
-            console.log("error", e)
+            console.log("error", e);
         }
         
     }
@@ -95,7 +106,7 @@ const LoginPage = props => {
     return(
         <View>
             <Text>Sign in With Google</Text>
-            <Button title="google sign in " onPress={() => props.signIn()}/>
+            <Button title="Google Sign In" onPress={() => props.signIn()}/>
         </View>
     )
 }
@@ -103,7 +114,13 @@ const LoginPage = props => {
 const LoggedIn = props => {
     return(
         <View>
-            <Button title="Get Messages" onPress={() => props.messages()}/>
+            {(this.state.messages != "") ? (
+                <Text>Message -> </Text>
+                <Text>{this.state.messages}</Text>
+            ) : (
+                <Button title="Get Messages" onPress={() => props.messages()}/>
+            )}
+            
         </View>
     )
 }
