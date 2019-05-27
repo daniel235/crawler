@@ -4,7 +4,6 @@ import { StyleSheet, Text, View, Button, Linking } from 'react-native';
 
 import { authorize } from 'react-native-app-auth';
 
-
 import * as Expo from 'expo';
 import Axios from 'axios';
 
@@ -18,7 +17,7 @@ class HomeScreen extends React.Component {
             accessToken: "",
             messages: "",
         }
-        
+    
     }
 
     messages = async() => {
@@ -114,13 +113,7 @@ const LoginPage = props => {
 const LoggedIn = props => {
     return(
         <View>
-            {(this.state.messages != "") ? (
-                <Text>Message -> </Text>
-                <Text>{this.state.messages}</Text>
-            ) : (
-                <Button title="Get Messages" onPress={() => props.messages()}/>
-            )}
-            
+            <Text>Logged In</Text>
         </View>
     )
 }

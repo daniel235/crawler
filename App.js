@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 
 import AppNav from './components/AppNavigator';
-import LogIn from './components/login';
+
 
 export default class App extends React.Component {
   constructor(props){
@@ -15,11 +15,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View>
-        {this.state.loggedIn ? (
-          <AppNav/>
-        ) : (
-          <LogIn/>
-        )}
+        <AppNav/>
       </View>
     );
   }
@@ -28,7 +24,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'black',
     alignItems: 'center',
     justifyContent: 'center',
   },
