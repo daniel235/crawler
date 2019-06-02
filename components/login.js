@@ -7,7 +7,7 @@ export default class LogIn extends React.Component {
     state = { email: '', password: '', errorMessage: null }
 
     handleLogin = () => {
-        var b = 'one'
+        this.email = "one";
     }
 
 

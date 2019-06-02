@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 
 import AppNav from './components/AppNavigator';
-
+import LogIn from './components/login';
 
 export default class App extends React.Component {
   constructor(props){
@@ -14,10 +14,8 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <View>
-        <AppNav/>
-      </View>
-    );
+      <AppNav/>
+    )
   }
 }
 

@@ -12,11 +12,11 @@ const AppNavigator = createStackNavigator({
         Home: { screen: HomeScreen }, 
         Profile: {screen: ProfileScreen},
         Login : { screen : LogIn},
-        SignUp : { screen : SignUp},
-        Loading : { screen : Loading},
+        Signup : { screen : SignUp},
+        Loadings : { screen : Loading},
     },
     {
-        initialRouteName : 'Loading'
+        initialRouteName : 'Loadings',
     }
 
 );

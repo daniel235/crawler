@@ -33,7 +33,7 @@ class HomeScreen extends React.Component {
                 method: 'GET',
                 body: user,
                 headers: new Headers({
-                    'Authorization': this.state.accessToken
+                    'Authorization': this.state.accessToken,
                 }),
             }).then(function(response) {
                 this.state.messages = response;
